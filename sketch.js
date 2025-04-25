@@ -41,18 +41,17 @@ function draw() {
   let waveform = fft.waveform();
 
   // 2. 파동 그래프 (중간)
-  if (volChange > waveThreshold) {
-    stroke(180);
-    strokeWeight(2);
-    noFill();
-    beginShape();
-    for (let i = 0; i < waveform.length; i++) {
-      let x = map(i, 0, waveform.length, 0, width); // 너비
-      let y = map(waveform[i], -1, 1, -50, 50); // 높이
-      vertex(x + 10, y + centerY); // 왼쪽 아래 기준
-    }
-    endShape();
+  waveform = fft.waveform(); // 파형 업데이트
+  stroke(180);
+  strokeWeight(5);
+  noFill();
+  beginShape();
+  for (let i = 0; i < waveform.length; i++) {
+    let x = map(i, 0, waveform.length, 0, width); // 너비
+    let y = map(waveform[i], -1, 1, -50, 50); // 높이
+    vertex(x + 10, y + centerY); // 왼쪽 아래 기준
   }
+  endShape();
 
   // 3. 감정 원 (제일 위)
 let minVol = 60;
